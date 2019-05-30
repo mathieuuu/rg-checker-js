@@ -33,7 +33,7 @@ async function main() {
   while (true) {
     console.log("wait...");
     await sleep(5000);
-    console.log((new Date()) + " check...");
+    console.log((new Date()) + " check");
     check("PC");
     check("SL");
 
