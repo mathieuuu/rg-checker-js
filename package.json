@@ -2,7 +2,6 @@
     "main": "rg-checker.js",
     "dependencies": {
         "beepbeep": "^1.2.2",
-        "node-fetch": "2.6.0",
-        "node-notifier": "5.4.0"
+        "node-fetch": "2.6.0"
     }
 }

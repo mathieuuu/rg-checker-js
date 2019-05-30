@@ -1,13 +1,17 @@
 const fetch = require('node-fetch');
-var beep = require('beepbeep')
+const beep = require('beepbeep');
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function check(court) {
-  
-  fetch("https://tickets.rolandgarros.com/api/tunnel/products/day/20190530/court/"+court+"?_=1559165926325", { "credentials": "include", "headers": { "accept": "application/json, text/javascript", "accept-language": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7", "x-requested-with": "XMLHttpRequest" }, "body": null, "method": "GET", "mode": "cors" })
+  fetch("https://tickets.rolandgarros.com/api/tunnel/products/day/20190530/court/"+court+"?_=1559165926325", 
+    { "credentials": "include", 
+      "headers": { "accept": "application/json, text/javascript", "accept-language": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7", "x-requested-with": "XMLHttpRequest" }, 
+      "body": null, 
+      "method": "GET", 
+      "mode": "cors" })
     .then(res => res.json())
     .then(json => {
       
@@ -15,17 +19,14 @@ function check(court) {
         const price = o.priceAmount;
         const seats = o.seats;
         
-        if (seats > 0)
-          console.log(seats + " places sur "+court+" à "+price+"€")
-
         if (seats > 0 && price < 90) {
-          console.log(seats + " PLACES SUR "+court+" A "+price+"€ !")
+          console.log(seats + " PLACES SUR "+court+" A "+price+"€ !");
           beep();
+        } else if (seats > 0) {
+          console.log(seats + " places sur "+court+" à "+price+"€");
         }
-
       });
     });
-  
 }
 
 async function main() {
